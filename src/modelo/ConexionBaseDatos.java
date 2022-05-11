@@ -24,6 +24,8 @@ public class ConexionBaseDatos {
     
     private String dataCliente[];
     
+    private int ultimoId;
+    
     public ConexionBaseDatos(){
         
         this.miConexion = null; // inicializamos la conexion null
@@ -62,6 +64,7 @@ public class ConexionBaseDatos {
         
         String sqlBuscarCliente = "SELECT * FROM CLIENTE WHERE CEDULA_CLIENTE = '" + cedulaCliente + "' LIMIT 1";
         
+        
         try {
             st = miConexion.createStatement();
             
@@ -89,7 +92,7 @@ public class ConexionBaseDatos {
                 
                 if(rs.next()){
                      
-                   int ultimoId = rs.getInt("numero_factura");
+                    ultimoId = rs.getInt("numero_factura");
                     
                     
                       PreparedStatement stDos = miConexion.prepareStatement("INSERT INTO FACTURA_HAS_PRODUCTO (factura_id_factura, producto_id_producto, precio_unitario, cantidad) VALUES (?,?,?,?)");
@@ -103,10 +106,10 @@ public class ConexionBaseDatos {
                             
                             stDos.executeUpdate();
                         }
-                      
+                    
                 }
               
-                System.out.println("exito");
+                System.out.println("exito factura registrada");
                 
                 
                 
@@ -116,6 +119,40 @@ public class ConexionBaseDatos {
             }
             
             
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBaseDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setRegistrarFormasDePagos(String formaPago, double montoPago, String comprobante){
+        /*
+        System.out.println("vamos a registrar las formas de pago con la factura: " + ultimoId);
+        System.out.println("Tipo: " + formaPago);
+        System.out.println("Monto: " + montoPago);
+        System.out.println("Comprobante: " + comprobante);
+        */
+        
+        String sql = "SELECT IDFORMA_DE_PAGOS FROM FORMA_DE_PAGOS WHERE NOMBRE_FORMA_PAGO = '" + formaPago +"'";
+        
+        try {
+            PreparedStatement stm = miConexion.prepareStatement(sql);
+            
+            rs = stm.executeQuery();
+            
+            if(rs.next()){
+                
+                int idFormaPago = rs.getInt("idforma_de_pagos");
+               
+                
+                PreparedStatement stm2 = miConexion.prepareStatement("INSERT INTO  factura_has_forma_de_pagos (factura_id_factura, forma_de_pagos_idforma_de_pagos, monto_pago, mun_comprobante_bancario) VALUES (?,?,?,?)");
+                
+                stm2.setInt(1, ultimoId);
+                stm2.setInt(2, idFormaPago);
+                stm2.setDouble(3, montoPago);
+                stm2.setString(4, comprobante);
+                
+                stm2.executeUpdate();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBaseDatos.class.getName()).log(Level.SEVERE, null, ex);
         }

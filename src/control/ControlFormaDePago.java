@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import modelo.ConexionBaseDatos;
 import vista.FormaDePago;
+import javax.swing.table.*;
 /**
  *
  * @author MANUEL
@@ -15,7 +16,10 @@ public class ControlFormaDePago {
     private ConexionBaseDatos conexionBD;
     private double montoAcumulado,  faltante;
     private ArrayList<RegistroFormaPagos>  agregarPago;
-    
+    private DefaultTableModel miModeloRecibidoFactura;
+    private String cedulaCliente;
+    private double montoBase, montoIva;
+        
     int contador;
     
     public ControlFormaDePago(){
@@ -89,15 +93,25 @@ public class ControlFormaDePago {
                 
                 vuelto = setFormatearDigito(vuelto);
                 
+                
+                if(comprobanteBancario.isEmpty()){
+                    
+                    comprobanteBancario = "NO ES REQUERIDO";
+                }
+                
+                agregarPago.add(new RegistroFormaPagos(tipoPago, comprobanteBancario, montoIntroducido));
+                
                 JOptionPane.showMessageDialog(vistaFormaDePago, "SU VUELTO ES " + vuelto +" Bs", "MENSAJE DEL SISTEMA", JOptionPane.QUESTION_MESSAGE);
                 
-                System.out.println("enviar a factura..");
+                faltante = vuelto;
+                
+                setProcesarFactura();
                 
             }else{
                 
                 if(comprobanteBancario.isEmpty()){
                     
-                    comprobanteBancario = "NO NECESITA";
+                    comprobanteBancario = "NO ES REQUERIDO";
                 }
                
                 agregarPago.add(new RegistroFormaPagos(tipoPago, comprobanteBancario, montoIntroducido));
@@ -121,6 +135,7 @@ public class ControlFormaDePago {
                 
                     vistaFormaDePago.setEtiquetaFaltante(String.valueOf(0));
                     
+                    setProcesarFactura(); //registra la factura y los tipos de pagos
                     
                 }else{
                     
@@ -136,12 +151,26 @@ public class ControlFormaDePago {
         
         
     }
+        
+   
     
     public void setProcesarFactura(){
        
+        conexionBD.setEstableceConexion();
         
+        //traeremos las formas de pagos de la clase RegistroFormaPagos
+        double totalTransaccion = Double.parseDouble(vistaFormaDePago.getTxtTotalBolivares().getText());
+        double vuelto = faltante;
+
                 
+        conexionBD.setRegistrarFactura(cedulaCliente,montoBase,montoIva,totalTransaccion,vuelto,miModeloRecibidoFactura);
         
+        for(RegistroFormaPagos rp : agregarPago){
+            
+            conexionBD.setRegistrarFormasDePagos(rp.getTipoPago(), rp.getMonto(), rp.getComprobanteBancario());
+            
+        }
+        System.out.println("Mandamos a imprimir factura");
     }
     
     private double setFormatearDigito(double numero){
@@ -165,5 +194,25 @@ public class ControlFormaDePago {
       return d;
     }
 }
+    public void setCedulaCliente(String cedula){
+        
+        this.cedulaCliente = cedula;
+    }
+    
+     public void setModeloFactura(DefaultTableModel modelo){
+        
+         miModeloRecibidoFactura = modelo;
+         
+    }
+    
+    public void setMontoBase(double montoBase){
+        this.montoBase = montoBase;
+    }
+     
+    public void setMontoIva(double montoIva){
+        this.montoIva = montoIva;
+    }
+    
+    
    
 }

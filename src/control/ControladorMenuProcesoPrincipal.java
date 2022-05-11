@@ -19,6 +19,8 @@ public class ControladorMenuProcesoPrincipal {
   
     private  double montoPagar;
     private  double montoDivisa;
+    private double montoIva;
+    private double montoBase;
  
     
     public ControladorMenuProcesoPrincipal(){
@@ -279,7 +281,20 @@ public class ControladorMenuProcesoPrincipal {
               control.setConfiguraVentana();
               
               control.setCargaMontos(montoPagar, montoDivisa);
-                
+              
+              DefaultTableModel modeloFactura = vistaMenuOperaciones.getModeloTablaFactura();
+              
+              control.setModeloFactura(modeloFactura);
+              
+              String cedula = vistaMenuOperaciones.getSigla()+"-"+vistaMenuOperaciones.gettxtCliente().getText();
+              
+              control.setCedulaCliente(cedula);
+              
+              control.setMontoIva(montoIva);
+              
+              control.setMontoBase(montoBase);
+              
+              
                 
             }
             
@@ -419,9 +434,9 @@ public class ControladorMenuProcesoPrincipal {
         
         DefaultTableModel modelo = vistaMenuOperaciones.getModeloTablaFactura();
         
-        double montoBase=0;
+        
         double iva = 16; //OJO ESTE CAMPO TIENE QUE VENIR DESDE BASE DE DATOS.
-        double montoIva;
+        
         montoPagar = 0;
         double tasaCambioDolar = vistaMenuOperaciones.getEtiquetaDolar();
         montoDivisa =0;
