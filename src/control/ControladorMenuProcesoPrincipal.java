@@ -17,6 +17,8 @@ public class ControladorMenuProcesoPrincipal {
     private ConexionBaseDatos miConexion;
     
   
+    private boolean evaluaModelo;
+    
     private  double montoPagar;
     private  double montoDivisa;
     private double montoIvaEnviar;
@@ -174,11 +176,11 @@ public class ControladorMenuProcesoPrincipal {
                 
                    origen == vistaMenuOperaciones.getBtnAgregarFactura()
                 */
-                 
+                 /*
                 if(!vistaMenuOperaciones.getTxtNombreCliente().getText().isEmpty()&&vistaMenuOperaciones.getModeloTablaFactura().getValueAt(0, 0)!=null ){
                     
                     vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getBtnFacturarPedido(), true);
-                }
+                }*/
                 
             }
             
@@ -328,6 +330,8 @@ public class ControladorMenuProcesoPrincipal {
                         
                         if(modelo.getRowCount()==0){
                             
+                            evaluaModelo = false;
+                            
                             vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getEliminarItem(), false);
                             
                             vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getBtnFacturarPedido(), false);
@@ -382,11 +386,11 @@ public class ControladorMenuProcesoPrincipal {
                     EVALUA SI LA PRIMERA FILA DEL MODELO DE LA TABLA FACTURA
                     SEA DIFERENTE A NULL OSEA TENGA AL MENOS UN REGISTRO.
                     CON LA FINALIDAD DE HABILITAR EL BOTON DE PAGAR FACTURA.
-                */
-                if(modelo.getValueAt(0, 0)!=null){
+                *//*
+                if(modelo.getValueAt(0, 0)!=null ){
             
                     vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getBtnFacturarPedido(), true);
-                }
+                }*/
             }
             
         }
