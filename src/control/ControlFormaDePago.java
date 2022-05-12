@@ -1,7 +1,18 @@
 package control;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import modelo.ConexionBaseDatos;
 import vista.FormaDePago;
@@ -161,7 +172,6 @@ public class ControlFormaDePago {
         //traeremos las formas de pagos de la clase RegistroFormaPagos
         double totalTransaccion = Double.parseDouble(vistaFormaDePago.getTxtTotalBolivares().getText());
         double vuelto = faltante;
-
                 
         conexionBD.setRegistrarFactura(cedulaCliente,montoBase,montoIva,totalTransaccion,vuelto,miModeloRecibidoFactura);
         
@@ -170,7 +180,7 @@ public class ControlFormaDePago {
             conexionBD.setRegistrarFormasDePagos(rp.getTipoPago(), rp.getMonto(), rp.getComprobanteBancario());
             
         }
-        System.out.println("Mandamos a imprimir factura");
+    
     }
     
     private double setFormatearDigito(double numero){

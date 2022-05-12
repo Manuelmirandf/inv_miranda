@@ -19,8 +19,8 @@ public class ControladorMenuProcesoPrincipal {
   
     private  double montoPagar;
     private  double montoDivisa;
-    private double montoIva;
-    private double montoBase;
+    private double montoIvaEnviar;
+    private double montoBaseEnviar;
  
     
     public ControladorMenuProcesoPrincipal(){
@@ -275,6 +275,8 @@ public class ControladorMenuProcesoPrincipal {
             
             if(origen == vistaMenuOperaciones.getBtnFacturarPedido()){
                 
+               //double montoIva;
+               //double montoBase;
                 
               ControlFormaDePago  control = new ControlFormaDePago();
               
@@ -290,9 +292,9 @@ public class ControladorMenuProcesoPrincipal {
               
               control.setCedulaCliente(cedula);
               
-              control.setMontoIva(montoIva);
+              control.setMontoIva(montoIvaEnviar);
               
-              control.setMontoBase(montoBase);
+              control.setMontoBase(montoBaseEnviar);
               
               
                 
@@ -436,7 +438,8 @@ public class ControladorMenuProcesoPrincipal {
         
         
         double iva = 16; //OJO ESTE CAMPO TIENE QUE VENIR DESDE BASE DE DATOS.
-        
+        double montoBase =0;
+        double montoIva;
         montoPagar = 0;
         double tasaCambioDolar = vistaMenuOperaciones.getEtiquetaDolar();
         montoDivisa =0;
@@ -474,6 +477,10 @@ public class ControladorMenuProcesoPrincipal {
             
             vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getBtnFacturarPedido(), true);
         }
+        
+           
+           this.montoIvaEnviar = montoIva;
+           this.montoBaseEnviar = montoBase;
         
     }
       
