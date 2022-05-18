@@ -262,6 +262,7 @@ public class ControladorMenuProcesoPrincipal {
                 
                 vistaMenuOperaciones.setLlenarTablaFactura(modeloTabla);
                 
+                /*
                 if(modeloTabla.getValueAt(0, 0)!=null){
                     
                     vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getEliminarItem(), true);
@@ -270,7 +271,7 @@ public class ControladorMenuProcesoPrincipal {
                 }else{
                     
                     System.out.println("aqui programaremos cuando no haya regstro");
-                }
+                }*/
                 
                 configuraMontosVentas();
             }
@@ -332,9 +333,10 @@ public class ControladorMenuProcesoPrincipal {
                             
                             evaluaModelo = false;
                             
-                            vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getEliminarItem(), false);
+                            /*vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getEliminarItem(), false);
                             
                             vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getBtnFacturarPedido(), false);
+                            */
                         }
                     }
                 }
@@ -377,10 +379,10 @@ public class ControladorMenuProcesoPrincipal {
                 DEL NOMBRE DEL CLIENTE TENGA REGISTRO 
                 
             */
-            if(!vistaMenuOperaciones.getTxtNombreCliente().getText().isEmpty()){
+            //if(!vistaMenuOperaciones.getTxtNombreCliente().getText().isEmpty()){
                 
                 // CAPTURA EL MODELO DE LA TABLA FACTURA
-                DefaultTableModel modelo = vistaMenuOperaciones.getModeloTablaFactura();
+                //DefaultTableModel modelo = vistaMenuOperaciones.getModeloTablaFactura();
                 
                 /*
                     EVALUA SI LA PRIMERA FILA DEL MODELO DE LA TABLA FACTURA
@@ -391,7 +393,7 @@ public class ControladorMenuProcesoPrincipal {
             
                     vistaMenuOperaciones.setCambiarEstadoBoton(vistaMenuOperaciones.getBtnFacturarPedido(), true);
                 }*/
-            }
+            //}
             
         }
 

@@ -125,13 +125,7 @@ public class ConexionBaseDatos {
     }
     
     public void setRegistrarFormasDePagos(String formaPago, double montoPago, String comprobante){
-        /*
-        System.out.println("vamos a registrar las formas de pago con la factura: " + ultimoId);
-        System.out.println("Tipo: " + formaPago);
-        System.out.println("Monto: " + montoPago);
-        System.out.println("Comprobante: " + comprobante);
-        */
-        
+
         String sql = "SELECT IDFORMA_DE_PAGOS FROM FORMA_DE_PAGOS WHERE NOMBRE_FORMA_PAGO = '" + formaPago +"'";
         
         try {
@@ -157,7 +151,30 @@ public class ConexionBaseDatos {
             Logger.getLogger(ConexionBaseDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public int getCorrelativoFactura(){
+        
+        String sql = "SELECT MAX(ID_FACTURA) as num_factura FROM FACTURA";
+                
+        int numeroFactura = 0;
+        
+        try {
+           
+            st = miConexion.createStatement();            
+            rs = st.executeQuery(sql);
+            
+            if(rs.next()){
+                
+                numeroFactura = rs.getInt("num_factura");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBaseDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return numeroFactura;
+    }
     
     public boolean setRegistrarNuevoCliente(String tipoDocumento, String razonSocial, String telefono,
                                             String direccion, Component ventana){

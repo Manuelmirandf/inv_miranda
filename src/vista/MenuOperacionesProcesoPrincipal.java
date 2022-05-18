@@ -23,7 +23,7 @@ public class MenuOperacionesProcesoPrincipal extends javax.swing.JFrame {
     public MenuOperacionesProcesoPrincipal() {
         initComponents();
         
-        this.eliminarItem.setEnabled(false);
+        //this.eliminarItem.setEnabled(false);
         
         this.txtNombreCliente.setEditable(false);
         this.txtTelefono.setEditable(false);
@@ -40,7 +40,7 @@ public class MenuOperacionesProcesoPrincipal extends javax.swing.JFrame {
         this.txtCantidadProducto.setText("1");
         
         
-        this.btnFacturarPedido.setEnabled(false);
+        //this.btnFacturarPedido.setEnabled(false);
         
         
         

@@ -1,14 +1,9 @@
 package control;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -17,6 +12,7 @@ import javax.swing.*;
 import modelo.ConexionBaseDatos;
 import vista.FormaDePago;
 import javax.swing.table.*;
+import net.sf.jasperreports.engine.JasperReport;
 /**
  *
  * @author MANUEL
@@ -30,7 +26,7 @@ public class ControlFormaDePago {
     private DefaultTableModel miModeloRecibidoFactura;
     private String cedulaCliente;
     private double montoBase, montoIva;
-        
+    
     int contador;
     
     public ControlFormaDePago(){
@@ -181,6 +177,63 @@ public class ControlFormaDePago {
             
         }
     
+        setImprimirFactura();
+    }
+    
+    public void setImprimirFactura(){
+        
+        
+        
+        /*
+        File ruta = new File("R://Documentos//prueba//");
+        
+        if(ruta.exists()){
+            
+            try {
+                
+                conexionBD.setEstableceConexion();
+                
+                int numeroFactura = conexionBD.getCorrelativoFactura();
+                
+                FileOutputStream salida = new FileOutputStream(ruta + "//factura"+numeroFactura+".pdf");
+                
+                Document documento = new Document();
+                
+                PdfWriter.getInstance(documento, salida);
+                
+                documento.open();                
+                
+                Paragraph titulo =  new Paragraph("INVERSIONES MIRANDA 2020 C.A",
+                                                    FontFactory.getFont("arial",22,Font.BOLD));
+                
+                titulo.setAlignment(Paragraph.ALIGN_CENTER);
+                
+                documento.add(titulo);
+                
+                
+                PdfPTable a = new PdfPTable(3);
+                
+                a.addCell("codigo");
+                a.addCell("nombre");
+                a.addCell("apellido");
+                
+                documento.add(a);
+                
+                documento.close();
+                
+                System.out.println("se creo correctamente en ruta " + ruta);
+                
+            } catch (Exception ex) {
+                Logger.getLogger(ControlFormaDePago.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else{
+            System.out.println("no existe");
+        }
+        
+        
+        */
+        
     }
     
     private double setFormatearDigito(double numero){

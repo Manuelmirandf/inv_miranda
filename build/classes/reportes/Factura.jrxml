@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80e477c0-ea83-486c-be96-1cebf1726964">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM `factura` order by id_factura desc limit 1]]>
+	</queryString>
+	<field name="id_factura" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente_cedula_cliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_factura" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto_base" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto_impuesto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_transaccion" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vuelto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="0e8303dc-468d-4664-9fa6-2f3ab6a33605"/>
+				<textFieldExpression><![CDATA[$F{id_factura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="59" width="100" height="20" uuid="5c76a9b8-3d46-41d1-9682-9f4a0fac0c0e"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="393" y="0" width="100" height="20" uuid="dfda58cc-df9b-4503-babc-f6fc1c783a06"/>
+				<text><![CDATA[factura]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="7e51e28b-b82b-44eb-adc2-845a6a16295b"/>
+				<textFieldExpression><![CDATA[$F{cliente_cedula_cliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="445" y="25" width="100" height="20" uuid="06f89376-2067-4509-b654-b214b40a611b"/>
+				<textFieldExpression><![CDATA[$F{monto_base}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="393" y="25" width="100" height="20" uuid="d6d31e59-b94f-4757-ae46-63118dd2ef99"/>
+				<text><![CDATA[total base]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="445" y="0" width="100" height="20" uuid="20e8dc52-9cba-4c6f-8e40-2b982237553d"/>
+				<textFieldExpression><![CDATA[$F{monto_impuesto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="20" width="100" height="20" uuid="78b33565-5b3c-4447-8b18-c679a9285ef3"/>
+				<textFieldExpression><![CDATA[$F{total_transaccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="34" width="100" height="20" uuid="3ae81968-055f-4870-ba90-925272fd37f7"/>
+				<textFieldExpression><![CDATA[$F{vuelto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="374" y="0" width="100" height="20" uuid="20241231-58bc-447c-b1b2-ff49e13a1abb"/>
+				<text><![CDATA[total impuesto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="20" width="100" height="20" uuid="807182b7-a79c-49b8-89ab-ea4f6a9950be"/>
+				<text><![CDATA[total a pagar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="34" width="100" height="20" uuid="6dd4904f-c44d-4d50-b004-7d5b79c80c15"/>
+				<text><![CDATA[vuelto]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
