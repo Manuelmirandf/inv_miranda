@@ -15,6 +15,8 @@ public class ControladorAcceso {
     private ConexionBaseDatos miConexionBD;
     
     private static String usuarioNombre ;
+
+    private String var = "Hola";
     
     private boolean estado;
     
